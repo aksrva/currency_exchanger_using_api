@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+    <a href="/" id="home-button"></a>
+    {{#if homepage}}
+    <section class="homepage">
+        <div class="page">
+            <h1 class="typing" id="typetext">Currency Exchanger app</h1>
+            <p class="qu">
+                Currency is a medium of exchange for goods and services.
+            </p>
+        </div>
+        <div class="form">
+            <form action="/curr" method="get">
+                <h2>Select currency</h2>
+                <div>
+                    <select name="currency_name" id="curr">
+                        {{#each country}}
+                        <option value="{{currency_code}}" data-imagesrc="img/{{image}}"> {{currency_code}}</option>
+                         {{!-- <option value="0" data-imagesrc="http://i.imgur.com/XkuTj3B.png" data-description="Description with Facebook">Facebook</option> --}}
+                        {{/each}}
+                    </select>
+                </div>
+                <button type="submit">Convert</button>
+            </form>
+        </div>
+    </section>
+
+  
+    {{/if}}
+
+    {{#if exchange}}
+    <div class="selected-country">
+        <div class="select-flag">
+            <img src="img/{{selectedImage}}" alt="">
+        </div>
+        <div class="select-currency-code">
+            {{selected}}
+        </div>
+    </div>
+    <section class="exchange">
+
+        {{#each country}}
+        <div class="country">
+            <div class="country-flag">
+                <img src="img/{{image}}" alt="">
+            </div>
+            <div class="country-currency-code">
+                {{currency_code}}
+            </div>
+            <div class="rates">
+                {{rates}}
+            </div>
+        </div>
+        {{/each}}
+    </section>
+    {{/if}}
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/jsmodules/ddslick/master/dist/jquery.ddslick.min.js" ></script>
+<script>
+    $("#curr").ddslick({
+        width: "100%",
+        imagePosition: "left",
+        data: [],
+        keepJSONItemsOnTop: false,
+        animationTime: 50,
+        height: "200px",
+        background: "#eee",
+        selectText: "",
+        defaultSelectedIndex: null,
+        truncateDescription: true,
+        imagePosition: "left", // or 'right'
+        showSelectedHTML: true,
+        clickOffToClose: true,
+        embedCSS: true,
+    });
+</script>
+</body>
+
+
+</html>
